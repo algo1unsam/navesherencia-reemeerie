@@ -1,30 +1,75 @@
 import naves.*
 
-describe "Nave de carga" {
-
+describe "Tests" {
+	const naveCarga = new Nave_de_carga()
+	const navePasajeros = new Nave_de_pasajeros()
+	const naveRadioactiva = new Nave_de_carga_radioactiva()
+	const naveCombate = new Nave_de_combate()
+	
 //	const naveVacia = 
 //	const naveLlena = 
 
-	test "sobrecargada" {
+	//test "sobrecargada" {
+		
+	//}
+
+	//test "no sobrecargada" {
+		
+	//}
+
+	//test "excedida de velocidad" {
+		
+	//}
+
+	//test "no excedida de velocidad" {
+		
+	//}
+
+	//test "recibir amenaza" {
+		
+	//}
+	test "propulsar"{
+		naveCarga.velocidad(0)
+		assert.equals(0, naveCarga.velocidad())
+		naveCarga.propulsar()
+		assert.equals(20000, naveCarga.velocidad())
+		navePasajeros.velocidad(290000)
+		navePasajeros.propulsar()
+		assert.equals(300000, navePasajeros.velocidad())
+	}
 	
+	test "nave radioactiva"{
+		naveRadioactiva.masa_carga(5000)
+		naveRadioactiva.velocidad(10000)
+		naveRadioactiva.recibe_amenaza()
+		assert.equals(0, naveRadioactiva.velocidad())
+		assert.equals(5000, naveRadioactiva.masa_carga())
 	}
-
-	test "no sobrecargada" {
-		
+	test "preparar"{
+		navePasajeros.velocidad(290000)
+		navePasajeros.preparar()
+		assert.equals(300000, navePasajeros.velocidad())
+		naveRadioactiva.velocidad(0)
+		naveRadioactiva.preparar()
+		assert.equals(15000, naveRadioactiva.velocidad())
+		assert.that(naveRadioactiva.sellada_al_vacio())
+		naveCombate.modoAtaque(true)
+		naveCombate.velocidad(0)
+		assert.equals("Volviendo a base", naveCombate.preparar())
+		assert.equals(15000, naveCombate.velocidad())
+		naveCombate.modoAtaque(false)
+		naveCombate.velocidad(0)
+		assert.equals("Saliendo en mision", naveCombate.preparar())
+		assert.equals(15000, naveCombate.velocidad())
+		assert.that(naveCombate.modoAtaque())
 	}
-
-	test "excedida de velocidad" {
-		
+	test "encontrar enemigo"{
+		navePasajeros.velocidad(0)
+		assert.equals(0, navePasajeros.velocidad())
+		navePasajeros.encontrar_enemigo()
+		assert.equals(20000, navePasajeros.velocidad())
+		assert.that(navePasajeros.alarma())
 	}
-
-	test "no excedida de velocidad" {
-		
-	}
-
-	test "recibir amenaza" {
-		
-	}
-
 }
 
 describe "Nave de pasajeros" {
@@ -32,7 +77,7 @@ describe "Nave de pasajeros" {
 //	const naveSinPasajeros = 
 //	const naveConPasajeros =
 
-	test "velocidad maxima sin pasajeros" {
+	/* test "velocidad maxima sin pasajeros" {
 	
 	}
 
@@ -50,8 +95,8 @@ describe "Nave de pasajeros" {
 
 	test "recibir amenaza" {
 		
-	}
-
+	}  */
+ 
 }
 
 describe "Nave de combate" {
@@ -59,7 +104,7 @@ describe "Nave de combate" {
 //	const naveEnReposo =
 //	const naveEnAtaque = 
 
-	test "no esta invisible en reposo" {
+	/* test "no esta invisible en reposo" {
 		
 	}
 
@@ -77,6 +122,6 @@ describe "Nave de combate" {
 
 	test "recibir amenaza en ataque" {
 		
-	}
+	}  */
 }
 
